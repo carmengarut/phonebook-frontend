@@ -3,7 +3,7 @@ import axios from 'axios';
 export const updatePerson = ({name, number, id}) => {
   
   return axios
-    .put("http://localhost:3001/persons/" + id, {name, number, id})
+    .put("https://warm-chamber-94978.herokuapp.com/persons/" + id, {name, number, id})
     .then(response => {
        const { data } = response;
        return data;
