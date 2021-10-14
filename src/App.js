@@ -49,14 +49,14 @@ const App = () => {
         number: newNumber
       };
   
-      const ids = persons.map(person => person.id)
-      const maxId = persons.length === 0 ? 0 : Math.max(...ids)
       createPerson(personToAdd)
-        .then(setPersons(prev => [...prev, {
-          name: newName,
-          number: newNumber,
-          id: maxId + 1
-        }]))
+        .then(response => {
+          setPersons(prev => [...prev, {
+          name: response.name,
+          number: response.number,
+          id: response.id
+          }])
+        })
         .catch((e) => {
           console.error(e)
         });
@@ -71,7 +71,11 @@ const App = () => {
     let result = window.confirm('Are you sure you want to delete this person?')
     if (result === true) {
       deletePerson(target.value)
-        .then(setPersons(persons.filter(person => person.id !== Number(target.value))))
+        .then(response => {
+          setPersons(persons.filter(person => person.id !== target.value))
+        })
+
+        
     }
   }
 
